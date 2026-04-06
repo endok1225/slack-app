@@ -5,7 +5,7 @@ const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET
 });
 
-app.command('/order', async ({ ack, body, client }) => {
+app.command('/order2', async ({ ack, body, client }) => {
   await ack();
 
   await client.views.open({
