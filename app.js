@@ -39,6 +39,7 @@ app.command('/order', async ({ ack, body, client }) => {
 });
 
 (async () => {
-  await app.start(3000);
-  console.log('⚡️ Slack app is running!');
+  const port = process.env.PORT || 3000;
+  await app.start(port);
+  console.log(`Slack app is running on port ${port}`);
 })();
