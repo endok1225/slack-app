@@ -1,5 +1,5 @@
 const { App } = require('@slack/bolt');
-const fetch = require('node-fetch');
+//const fetch = require('node-fetch');
 
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
