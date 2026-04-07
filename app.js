@@ -72,7 +72,7 @@ try {
       details: [
         {
           amount: 1000,
-          account_item_id: 1,
+          account_item_id: 1038443880,
           tax_code: 0,
           description: item
         }
