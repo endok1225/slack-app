@@ -12,6 +12,7 @@ const COMPANY_ID = '12593326';
 
 // コマンド → モーダル表示
 app.command('/order2', async ({ ack, body, client }) => {
+  console.log("モーダル表示きた");
   await ack();
 
   await client.views.open({
@@ -47,7 +48,8 @@ app.command('/order2', async ({ ack, body, client }) => {
 
 // ★ モーダル送信時
 app.view('order_modal', async ({ ack, body, view }) => {
-  await ack(); // ← これ最速で
+   console.log("order_modalきた");
+ await ack(); // ← これ最速で
 
   const item =
     view.state.values.item_block.item_input.value;
