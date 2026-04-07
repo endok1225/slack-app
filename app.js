@@ -7,8 +7,8 @@ const app = new App({
 });
 
 // ★ freee設定 12554244
-const ACCESS_TOKEN = '12593326';
-const COMPANY_ID = '33l8bplKLBynmHuFGHyLSMjimwhMdXm_9vlfxY0wUF4';
+const ACCESS_TOKEN = '33l8bplKLBynmHuFGHyLSMjimwhMdXm_9vlfxY0wUF4';
+const COMPANY_ID = '12593326';
 
 // コマンド → モーダル表示
 app.command('/order2', async ({ ack, body, client }) => {
