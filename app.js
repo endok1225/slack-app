@@ -56,8 +56,10 @@ app.view('order_modal', async ({ ack, body, view }) => {
 
   console.log('入力値:', item);
 
-  // ★ freee登録
-  await fetch('https://api.freee.co.jp/api/1/deals', {
+try {
+  console.log("🔥 freee送信前");
+
+  const res = await fetch('https://api.freee.co.jp/api/1/deals', {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${ACCESS_TOKEN}`,
@@ -72,11 +74,18 @@ app.view('order_modal', async ({ ack, body, view }) => {
           amount: 1000,
           account_item_id: 1,
           tax_code: 0,
-          description: item // ← 商品名を使う
+          description: item
         }
       ]
     })
   });
+
+  const data = await res.text();
+  console.log("🔥 freeeレスポンス:", data);
+
+} catch (e) {
+  console.error("🔥 エラー:", e);
+}
 
   console.log('freee登録完了');
 });
