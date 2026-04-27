@@ -9,16 +9,14 @@ const app = new App({
 // ★ freee設定 12554244
 const ACCESS_TOKEN = '33l8bplKLBynmHuFGHyLSMjimwhMdXm_9vlfxY0wUF4';
 const COMPANY_ID = '12593326';
-
-// コマンド → モーダル表示
-app.command('/order2', async ({ ack, body, client }) => {
+app.command('/order2', async ({ ack, body, respond }) => {
   await ack();
 console.log("channel_id:", body.channel_id);
 console.log("user_id:", body.user_id);
 console.log("channel_name:", body.channel_name);
+
   await respond({
-    channel: body.channel_id,
-    user: body.user_id,
+    response_type: 'ephemeral',
     text: '発注メニュー',
     blocks: [
       {
@@ -33,26 +31,17 @@ console.log("channel_name:", body.channel_name);
         elements: [
           {
             type: 'button',
-            text: {
-              type: 'plain_text',
-              text: '業務委託'
-            },
+            text: { type: 'plain_text', text: '業務委託' },
             url: 'https://www.yahoo.co.jp'
           },
           {
             type: 'button',
-            text: {
-              type: 'plain_text',
-              text: '紙発注'
-            },
+            text: { type: 'plain_text', text: '紙発注' },
             url: 'https://www.google.com'
           },
           {
             type: 'button',
-            text: {
-              type: 'plain_text',
-              text: '製版'
-            },
+            text: { type: 'plain_text', text: '製版' },
             url: 'https://www.bing.com'
           }
         ]
