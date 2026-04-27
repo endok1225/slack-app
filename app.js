@@ -13,8 +13,10 @@ const COMPANY_ID = '12593326';
 // コマンド → モーダル表示
 app.command('/order2', async ({ ack, body, client }) => {
   await ack();
-
-  await client.chat.postEphemeral({
+console.log("channel_id:", body.channel_id);
+console.log("user_id:", body.user_id);
+console.log("channel_name:", body.channel_name);
+  await respond({
     channel: body.channel_id,
     user: body.user_id,
     text: '発注メニュー',
