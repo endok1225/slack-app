@@ -12,84 +12,52 @@ const COMPANY_ID = '12593326';
 
 // コマンド → モーダル表示
 app.command('/order2', async ({ ack, body, client }) => {
-  console.log("モーダル表示きた");
   await ack();
 
-  await client.views.open({
-    trigger_id: body.trigger_id,
-    view: {
-      type: 'modal',
-      callback_id: 'order_modal', // ★これ重要
-      title: {
-        type: 'plain_text',
-        text: '発注フォーム'
+  await client.chat.postEphemeral({
+    channel: body.channel_id,
+    user: body.user_id,
+    text: '発注メニュー',
+    blocks: [
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: '*発注メニューを選択してください*'
+        }
       },
-      blocks: [
-        {
-          type: 'input',
-          block_id: 'item_block',
-          label: {
-            type: 'plain_text',
-            text: '商品名'
+      {
+        type: 'actions',
+        elements: [
+          {
+            type: 'button',
+            text: {
+              type: 'plain_text',
+              text: '業務委託'
+            },
+            url: 'https://www.yahoo.co.jp'
           },
-          element: {
-            type: 'plain_text_input',
-            action_id: 'item_input'
+          {
+            type: 'button',
+            text: {
+              type: 'plain_text',
+              text: '紙発注'
+            },
+            url: 'https://www.google.com'
+          },
+          {
+            type: 'button',
+            text: {
+              type: 'plain_text',
+              text: '製版'
+            },
+            url: 'https://www.bing.com'
           }
-        }
-      ],
-      submit: {
-        type: 'plain_text',
-        text: '送信'
+        ]
       }
-    }
+    ]
   });
 });
-
-// ★ モーダル送信時
-app.view('order_modal', async ({ ack, body, view }) => {
-   console.log("order_modalきた");
- await ack(); // ← これ最速で
-
-  const item =
-    view.state.values.item_block.item_input.value;
-
-  console.log('入力値:', item);
-
-try {
-  console.log("🔥 freee送信前");
-
-  const res = await fetch('https://api.freee.co.jp/api/1/deals', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${ACCESS_TOKEN}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      issue_date: '2026-04-07',
-      type: 'expense',
-      company_id: Number(COMPANY_ID),
-      details: [
-        {
-          amount: 1000,
-          account_item_id: 1038443880,
-          tax_code: 0,
-          description: item
-        }
-      ]
-    })
-  });
-
-  const data = await res.text();
-  console.log("🔥 freeeレスポンス:", data);
-
-} catch (e) {
-  console.error("🔥 エラー:", e);
-}
-
-  console.log('freee登録完了');
-});
-
 (async () => {
   const port = process.env.PORT || 3000;
   await app.start(port);
