@@ -32,12 +32,12 @@ console.log("channel_name:", body.channel_name);
           {
             type: 'button',
             text: { type: 'plain_text', text: '業務委託' },
-            url: 'https://www.yahoo.co.jp'
+            url: 'https://localhost:7187/Order/Index'
           },
           {
             type: 'button',
             text: { type: 'plain_text', text: '紙発注' },
-            url: 'https://www.google.com'
+            url: 'https://localhost:7187/Order/Index'
           },
           {
             type: 'button',
