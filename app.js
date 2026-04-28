@@ -32,7 +32,7 @@ console.log("channel_name:", body.channel_name);
           {
             type: 'button',
             text: { type: 'plain_text', text: '業務委託' },
-            url: 'https://localhost:7187/Order/Index'
+            url: 'https://localhost:7187/'
           },
           {
             type: 'button',
